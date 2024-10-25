@@ -124,38 +124,38 @@
 
         .button {
             display: inline-block;
-            padding: 8px 12px; /* Smaller padding for smaller buttons */
+            padding: 8px 12px;
             background-color: #87CEFA;
             color: white;
             border: none;
             text-align: center;
             cursor: pointer;
-            margin: 10px 5px; /* Reduced margin between buttons */
-            border-radius: 4px; /* Subtle rounding */
+            margin: 10px 5px;
+            border-radius: 4px;
             text-decoration: none;
-            font-size: 14px; /* Smaller font size */
-            transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth hover transition */
+            font-size: 14px;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
         }
 
         .button:hover {
-            background-color: #00BFFF; /* Slightly darker on hover */
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Add shadow on hover for more depth */
+            background-color: #00BFFF;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
         .nav-buttons {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 10px; /* Even spacing between buttons */
+            gap: 10px;
         }
 
         .call-icons i:hover {
-            color: #00BFFF; /* Add a hover color */
-            transform: scale(1.1); /* Slight zoom effect on hover */
+            color: #00BFFF;
+            transform: scale(1.1);
         }
 
         .translator-list ul {
-            list-style-type: decimal; /* Use numbers for the list */
+            list-style-type: decimal;
             text-align: left;
         }
 
@@ -165,7 +165,7 @@
 
         /* Main content setup for flexbox layout */
         .main-content {
-            flex: 1; /* Ensures the main content fills the remaining space */
+            flex: 1;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -189,40 +189,39 @@
             font-size: 20px;
             margin-bottom: 10px;
         }
-        
-.show-translators-button {
-    background: linear-gradient(90deg, rgba(69,182,252,1) 0%, rgba(204,93,232,1) 100%);
-    color: white;
-    padding: 10px;
-    border: none;
-    border-radius: 25px;
-    width: 100%;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background 0.3s;
-    margin-top: 20px;
-}
 
-.show-translators-button:hover {
-    background: linear-gradient(90deg, rgba(69,182,252,1) 0%, rgba(204,93,232,1) 100%);
-    opacity: 0.9;
-}
+        .show-translators-button {
+            background: linear-gradient(90deg, rgba(69,182,252,1) 0%, rgba(204,93,232,1) 100%);
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 25px;
+            width: 100%;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 20px;
+        }
 
-@media (max-width: 600px) {
-    .nav-buttons {
-        flex-direction: column;
-        gap: 15px;
-    }
-}
+        .show-translators-button:hover {
+            background: linear-gradient(90deg, rgba(69,182,252,1) 0%, rgba(204,93,232,1) 100%);
+            opacity: 0.9;
+        }
 
-.main-content {
-    padding-bottom: 60px;
-}
+        @media (max-width: 600px) {
+            .nav-buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
 
-.translator-list {
-    word-wrap: break-word;
-}
+        .main-content {
+            padding-bottom: 60px;
+        }
 
+        .translator-list {
+            word-wrap: break-word;
+        }
     </style>
 </head>
 <body>
@@ -282,7 +281,7 @@
         <label for="language">Select Language</label>
         <select id="language" name="language">
             <option value="spanish">Spanish</option>
-            <option value="filipino">Filipino</option>
+                        <option value="filipino">Filipino</option>
             <option value="chinese">Chinese</option>
         </select>
     </div>
@@ -308,7 +307,8 @@
     <!-- Text Area for Manual Text Input -->
     <div class="input-group">
         <label for="text-to-translate">Text to Translate</label>
-       <textarea id="text-to-translate" rows="6" placeholder="Enter text here"></textarea>    </div>
+        <textarea id="text-to-translate" rows="6" placeholder="Enter text here"></textarea>    
+    </div>
 
     <!-- Action Buttons -->
     <a href="#" class="button" onclick="submitForTranslation()">Translate</a>
@@ -332,75 +332,6 @@
     </div>
 </div>
 
-<!-- Footer outside of the main content -->
-<footer>
-    <p>LingoBridge | Unlock the Power of Translation, Anytime, Anywhere</p>
-</footer>
-
-<script>
-    // Simulated function to move to the next step (bypassing login)
-    function moveToNextStep() {
-        document.getElementById('login-section').classList.add('hidden');
-        document.getElementById('translation-services').classList.remove('hidden');
-    }
-
-    // Show Document Translation Form
-    function showDocumentTranslation() {
-        document.getElementById('translation-services').classList.add('hidden');
-        document.getElementById('document-translation').classList.remove('hidden');
-    }
-
-    // Submit text for translation
-    function submitForTranslation() {
-        const textToTranslate = document.getElementById('text-to-translate').value;
-        const language = document.getElementById('language').value;
-
-        if (!textToTranslate || !language) {
-            alert('Please provide both the text and language.');
-            return;
-        }
-
-        // Perform translation using AI-powered tool (dummy function for now)
-        const translatedText = aiPoweredTranslation(textToTranslate, language);
-
-        // Display the translation result
-        document.getElementById('original-text').innerText = textToTranslate;
-        document.getElementById('translated-text').innerText = translatedText;
-
-        // Hide the document translation form and show the results
-        document.getElementById('document-translation').classList.add('hidden');
-        document.getElementById('translation-results').classList.remove('hidden');
-    }
-
-    // Dummy translation function (placeholder for actual API)
-    function aiPoweredTranslation(text, language) {
-        return text.split('').reverse().join('') + ` (Translated to ${language})`;
-    }
-
-    // Publish to the community translators
-    function publishToCommunity() {
-        alert('Published to community translators!');
-    }
-
-    // Send to a specific translator
-    function sendToTranslator() {
-        alert('Sending translation to specific translator...');
-    }
-
-    // Go back to translation services
-    function goBackToTranslationServices() {
-        document.getElementById('document-translation').classList.add('hidden');
-        document.getElementById('translation-results').classList.add('hidden');
-        document.getElementById('translation-services').classList.remove('hidden');
-    }
-
-    // Go back to document translation form
-    function goBackToDocumentTranslation() {
-        document.getElementById('translation-results').classList.add('hidden');
-        document.getElementById('document-translation').classList.remove('hidden');
-    }
-</script>
-
 <!-- Real-Time Translation Form -->
 <div class="container hidden" id="real-time-translation">
     <h2>Select Language for Real-Time Translation</h2>
@@ -415,7 +346,6 @@
         </select>
     </div>
 
-    <!-- Button for Show Translators with the updated class -->
     <a href="#" class="show-translators-button" onclick="showTranslators()">Show Translators</a>
 
     <!-- Previous Page and Home Page buttons below -->
@@ -459,13 +389,13 @@
     <a href="#" class="button" onclick="goHome()">Home Page</a>
 </div>
 
-<!-- Footer (remove any duplicate) -->
+<!-- Footer outside of the main content -->
 <footer>
     <p>LingoBridge | Unlock the Power of Translation, Anytime, Anywhere</p>
 </footer>
 
 <script>
-    // Dummy translator data
+    // Dummy translator data (you should replace this with actual data)
     const translators = {
         spanish: [
             { name: "Maria Garcia", status: "online" },
@@ -482,12 +412,64 @@
             { name: "Li Ming", status: "online" },
             { name: "Wang Ping", status: "offline" }
         ]
-    };
 
-    // Show the Real-Time Translation form
+    };
+    
+    // Simulated function to move to the next step (bypassing login)
+    function moveToNextStep() {
+        document.getElementById('login-section').classList.add('hidden');
+        document.getElementById('translation-services').classList.remove('hidden');
+    }
+
+    // Show Document Translation Form
+    function showDocumentTranslation() {
+        document.getElementById('translation-services').classList.add('hidden');
+        document.getElementById('document-translation').classList.remove('hidden');
+    }
+
+    // Show Real-Time Translation Form
     function showRealTimeTranslation() {
         document.getElementById('translation-services').classList.add('hidden');
         document.getElementById('real-time-translation').classList.remove('hidden');
+    }
+
+    // Submit text for translation
+    function submitForTranslation() {
+        const textToTranslate = document.getElementById('text-to-translate').value;
+        const language = document.getElementById('language').value;
+
+        if (!textToTranslate || !language) {
+            alert('Please provide both the text and language.');
+            return;
+        }
+
+        // Perform translation using AI-powered tool (dummy function for now)
+        const translatedText = aiPoweredTranslation(textToTranslate, language);
+
+        // Display the translation result
+        document.getElementById('original-text').innerText = textToTranslate;
+        document.getElementById('translated-text').innerText = translatedText;
+
+        // Hide the document translation form and show the results
+        document.getElementById('document-translation').classList.add('hidden');
+        document.getElementById('translation-results').classList.remove('hidden');
+    }
+
+    // Dummy translation function (placeholder for actual API)
+    function aiPoweredTranslation(text, language) {
+        return text.split('').reverse().join('') + ` (Translated to ${language})`;
+    }
+
+    // Go back to translation services
+    function goBackToTranslationServices() {
+        document.querySelectorAll('.container').forEach(container => container.classList.add('hidden'));
+        document.getElementById('translation-services').classList.remove('hidden');
+    }
+
+    // Go back to document translation form
+    function goBackToDocumentTranslation() {
+        document.getElementById('translation-results').classList.add('hidden');
+        document.getElementById('document-translation').classList.remove('hidden');
     }
 
     // Show the list of translators based on the selected language
@@ -521,13 +503,13 @@
         document.getElementById('translator-profile').classList.remove('hidden');
     }
 
-    // Go back to the Real-Time Translation selection screen
+    // Go back to Real-Time Translation selection screen
     function goBackToRealTime() {
         document.getElementById('translator-list-section').classList.add('hidden');
         document.getElementById('real-time-translation').classList.remove('hidden');
     }
 
-    // Go back to the Translator List from the profile
+    // Go back to Translator List from the profile
     function goBackToTranslatorList() {
         document.getElementById('translator-profile').classList.add('hidden');
         document.getElementById('translator-list-section').classList.remove('hidden');
@@ -545,14 +527,25 @@
 
     // Go back to translation services
     function goBackToTranslationServices() {
-        document.getElementById('real-time-translation').classList.add('hidden');
-        document.getElementById('translator-list-section').classList.add('hidden');
-        document.getElementById('translator-profile').classList.add('hidden');
+        document.querySelectorAll('.container').forEach(container => container.classList.add('hidden'));
         document.getElementById('translation-services').classList.remove('hidden');
     }
 
-    // Go to the home page (reset the entire process)
+    // Go back to the home page (reset the entire process)
     function goHome() {
         location.reload(); // Reload the page to reset all views
     }
+
+    // Publish to the community translators
+    function publishToCommunity() {
+        alert('Published to community translators!');
+    }
+
+    // Send to a specific translator
+    function sendToTranslator() {
+        alert('Sending translation to specific translator...');
+    }
 </script>
+
+</body>
+</html>
