@@ -346,6 +346,47 @@
             opacity: 0.9;
         }
         
+/* Style for the text area container */
+.text-area-container {
+    position: relative;
+}
+
+.text-box {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* Style for the floating "+" upload toggle button */
+.upload-toggle {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+/* Style for the upload options container */
+.upload-options {
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.upload-options.hidden {
+    display: none;
+}
         
     </style>
 </head>
@@ -404,33 +445,42 @@
 <div class="container hidden" id="document-translation">
     <h2>Submit Document for Translation</h2>
     <div class="language-select-container">
-    <label for="language-select" class="language-label">Select Language</label>
-    <select id="language-select" class="styled-select">
-        <option value="spanish">Spanish</option>
-        <option value="filipino">Filipino</option>
-        <option value="chinese">Chinese</option>
-    </select>
-</div>
+        <label for="language-select" class="language-label">Select Language</label>
+        <select id="language-select" class="styled-select">
+            <option value="spanish">Spanish</option>
+            <option value="filipino">Filipino</option>
+            <option value="chinese">Chinese</option>
+        </select>
+    </div>
+    
     <div class="input-group">
         <label for="text-to-translate">Text to Translate</label>
-        <textarea id="text-to-translate" rows="5" placeholder="Type your text here"></textarea>
-    </div>
-    <div class="upload-section">
-        <p class="upload-title">Or Upload a Document</p>
-        <div class="upload-options">
-            <label for="text-upload">
-                <i class="fas fa-file-upload icon"></i> Text File
-                <input type="file" id="text-upload" name="text-upload" accept=".txt, .doc, .docx, .pdf" style="display: none;">
-            </label>
-            <label for="screenshot-upload">
-                <i class="fas fa-camera icon"></i> Screenshot
-                <input type="file" id="screenshot-upload" name="screenshot-upload" accept=".png, .jpg, .jpeg" style="display: none;">
-            </label>
+        
+        <!-- Text area container with embedded upload button -->
+        <div class="text-area-container">
+            <textarea id="text-to-translate" class="text-box" rows="5" placeholder="Type your text here"></textarea>
+            
+            <!-- Floating "+" button to show upload options -->
+            <button class="upload-toggle" onclick="toggleUploadOptions()">+</button>
+            
+            <!-- Upload options (hidden by default) -->
+            <div class="upload-options hidden" id="upload-options">
+                <label for="text-upload">
+                    <i class="fas fa-file-upload icon"></i> Text File
+                    <input type="file" id="text-upload" name="text-upload" accept=".txt, .doc, .docx, .pdf" style="display: none;">
+                </label>
+                <label for="screenshot-upload">
+                    <i class="fas fa-camera icon"></i> Screenshot
+                    <input type="file" id="screenshot-upload" name="screenshot-upload" accept=".png, .jpg, .jpeg" style="display: none;">
+                </label>
+            </div>
         </div>
     </div>
+    
     <div class="action-buttons">
         <button class="translate-button" onclick="submitForTranslation()">Translate</button>
     </div>
+    
     <div class="bottom-nav-buttons">
         <button class="back-button" onclick="goBackToTranslationServices()">Previous Page</button>
         <button class="back-button" onclick="goHome()">Home Page</button>
@@ -634,6 +684,11 @@
         hideAllSections();
         document.getElementById('real-time-translation').classList.remove('hidden');
     }
+    
+    function toggleUploadOptions() {
+    const uploadOptions = document.getElementById("upload-options");
+    uploadOptions.classList.toggle("hidden");
+}
 
     function goBackToTranslatorList() {
         hideAllSections();
