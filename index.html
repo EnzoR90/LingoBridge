@@ -164,156 +164,189 @@
             bottom: 0;
             left: 0;
         }
+
+        /* Gradient button style for "Send to Community" and "Send to Translator" */
+        .gradient-button {
+            background: linear-gradient(90deg, rgba(69,182,252,1) 0%, rgba(204,93,232,1) 100%);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 5px;
+            transition: background 0.3s;
+            text-decoration: none;
+        }
+
+        .gradient-button:hover {
+            opacity: 0.9;
+        }
+
+        /* Center action buttons in the Translation Results section */
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        /* Styling for "Previous Page" and "Home Page" buttons */
+        .nav-buttons .button {
+            background: linear-gradient(90deg, rgba(69,182,252,1) 0%, rgba(204,93,232,1) 100%);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin: 5px;
+            text-decoration: none;
+        }
+
+        .nav-buttons .button:hover {
+            opacity: 0.9;
+        }
+
+        .back-button {
+            background: #e0e0e0;
+            color: #333;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+            text-decoration: none;
+        }
+
+        .back-button:hover {
+            background: #d5d5d5;
+        }
+
+        /* ADDITIONAL CODE FOR UI TRANSLATION */
+        /* Styles for positioning the bottom navigation buttons */
+        .bottom-nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+        }
+
+        /* Translate button styling */
+        .translate-button {
+            background: linear-gradient(90deg, rgba(69,182,252,1) 0%, rgba(204,93,232,1) 100%);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+            width: 100%;
+        }
+
+        .translate-button:hover {
+            opacity: 0.9;
+        }
+
+        /* Back and Home buttons styling */
+        .back-button {
+            background: #e0e0e0;
+            color: #333;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+            width: 48%;
+            text-align: center;
+        }
+
+        .back-button:hover {
+            background: #d5d5d5;
+        }
+
+        /* Select Language Container */
+        .language-select-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 15px;
+            margin-bottom: 20px;
+        }
+
+        .language-label {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .styled-select {
+            width: 100%;
+            max-width: 300px;
+            padding: 12px 10px;
+            font-size: 16px;
+            font-weight: bold;
+            border: 2px solid rgba(69,182,252,1);
+            border-radius: 8px;
+            background-color: #f4f8fb;
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23777' d='M2 0L0 2h4z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 12px 12px;
+            appearance: none;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+
+        .styled-select:hover {
+            background-color: #e9f3fc;
+        }
+
+        .styled-select:focus {
+            outline: none;
+            border-color: rgba(204,93,232,1);
+            background-color: #e9f3fc;
+        }
+
+        /* Action Icons for Translation Results */
+        .action-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .action-icons a {
+            color: white;
+            font-size: 24px;
+            padding: 15px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s;
+        }
+
+        .community-icon {
+            background-color: #4CAF50; /* Green background */
+        }
+
+        .translator-icon {
+            background-color: #FF9800; /* Orange background */
+        }
+
+        .action-icons a:hover {
+            opacity: 0.9;
+        }
         
-/* Gradient button style for "Send to Community" and "Send to Translator" */
-.gradient-button {
-    background: linear-gradient(90deg, rgba(69,182,252,1) 0%, rgba(204,93,232,1) 100%);
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 25px;
-    font-size: 16px;
-    cursor: pointer;
-    margin: 5px;
-    transition: background 0.3s;
-    text-decoration: none;
-}
-
-.gradient-button:hover {
-    opacity: 0.9;
-}
-
-/* Center action buttons in the Translation Results section */
-.action-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 20px;
-}
-
-/* Styling for "Previous Page" and "Home Page" buttons */
-.nav-buttons .button {
-    background: linear-gradient(90deg, rgba(69,182,252,1) 0%, rgba(204,93,232,1) 100%);
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 25px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background 0.3s;
-    margin: 5px;
-    text-decoration: none;
-}
-
-.nav-buttons .button:hover {
-    opacity: 0.9;
-}
-
-.back-button {
-    background: #e0e0e0;
-    color: #333;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 25px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background 0.3s;
-    text-decoration: none;
-}
-
-.back-button:hover {
-    background: #d5d5d5;
-}
-
-/* ADDITIONAL CODE FOR UI TRANSLATION */
-/* Styles for positioning the bottom navigation buttons */
-.bottom-nav-buttons {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-    padding-top: 20px;
-    border-top: 1px solid #ddd;
-}
-
-/* Translate button styling */
-.translate-button {
-    background: linear-gradient(90deg, rgba(69,182,252,1) 0%, rgba(204,93,232,1) 100%);
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 25px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background 0.3s;
-    width: 100%;
-}
-
-.translate-button:hover {
-    opacity: 0.9;
-}
-
-/* Back and Home buttons styling */
-.back-button {
-    background: #e0e0e0;
-    color: #333;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 25px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background 0.3s;
-    width: 48%;
-    text-align: center;
-}
-
-.back-button:hover {
-    background: #d5d5d5;
-}
-
-/* Select Language Container */
-.language-select-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 15px;
-    margin-bottom: 20px;
-}
-
-.language-label {
-    font-size: 20px;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 10px;
-    text-align: center;
-}
-
-.styled-select {
-    width: 100%;
-    max-width: 300px;
-    padding: 12px 10px;
-    font-size: 16px;
-    font-weight: bold;
-    border: 2px solid rgba(69,182,252,1);
-    border-radius: 8px;
-    background-color: #f4f8fb;
-    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23777' d='M2 0L0 2h4z'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 10px center;
-    background-size: 12px 12px;
-    appearance: none;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-}
-
-.styled-select:hover {
-    background-color: #e9f3fc;
-}
-
-.styled-select:focus {
-    outline: none;
-    border-color: rgba(204,93,232,1);
-    background-color: #e9f3fc;
-}
+        
     </style>
 </head>
 <body>
@@ -412,34 +445,43 @@
     <p><strong>Translated Text:</strong></p>
     <p id="translated-text"></p>
     
-    <!-- Action Buttons Section -->
-    <div class="action-buttons">
-        <a href="#" class="gradient-button" onclick="publishToCommunity()">Send to Community</a>
-        <a href="#" class="gradient-button" onclick="sendToTranslator()">Send to Translator</a>
+    <!-- Action Icons Section -->
+    <div class="action-icons">
+        <a href="#" class="community-icon" aria-label="Publish to Community" onclick="publishToCommunity()">
+    <i class="fas fa-users"></i>
+</a>
+<a href="#" class="translator-icon" aria-label="Send to Translator" onclick="sendToTranslator()">
+    <i class="fas fa-user-cog"></i>
+</a>
     </div>
     
     <!-- Navigation Buttons Section -->
-    <div class="nav-buttons">
-        <a href="#" class="back-button" onclick="goBackToDocumentTranslation()">Previous Page</a>
-        <a href="#" class="back-button" onclick="goBackToTranslationServices()">Home Page</a>
+    <div class="bottom-nav-buttons">
+        <button class="back-button" onclick="goBackToTranslationServices()">Previous Page</button>
+        <button class="back-button" onclick="goHome()">Home Page</button>
     </div>
 </div>
 
 <!-- Real-Time Translation Form -->
 <div class="container hidden" id="real-time-translation">
     <h2>Real-Time Translation</h2>
-<div class="language-select-container">
-    <label for="language-select" class="language-label">Select Language</label>
-    <select id="language-select" class="styled-select">
-        <option value="spanish">Spanish</option>
-        <option value="filipino">Filipino</option>
-        <option value="chinese">Chinese</option>
-    </select>
+    
+    <div class="language-select-container">
+        <label for="language-select" class="language-label">Select Language</label>
+        <select id="language-select" class="styled-select">
+            <option value="spanish">Spanish</option>
+            <option value="filipino">Filipino</option>
+            <option value="chinese">Chinese</option>
+        </select>
+    </div>
+    
+    <!-- Button Container with all buttons aligned properly -->
+    <div class="button-container">
+        <a href="#" class="show-translators-button gradient-button" aria-label="Show Translators" onclick="showTranslators()">Show Translators</a>
 </div>
-    <a href="#" class="show-translators-button gradient-button" onclick="showTranslators()">Show Translators</a>
     <div class="bottom-nav-buttons">
-        <a href="#" class="back-button" onclick="goBackToTranslationServices()">Previous Page</a>
-        <a href="#" class="back-button" onclick="goHome()">Home Page</a>
+        <button class="back-button" onclick="goBackToTranslationServices()">Previous Page</button>
+        <button class="back-button" onclick="goHome()">Home Page</button>
     </div>
 </div>
 
@@ -452,8 +494,10 @@
         </ol>
     </div>
     <div class="nav-buttons" style="margin-top: 10px;">
-        <a href="#" class="back-button" onclick="goBackToRealTime()">Previous Page</a>
-        <a href="#" class="back-button" onclick="goHome()">Home Page</a>
+        <div class="bottom-nav-buttons">
+            <button class="back-button" onclick="goBackToTranslationServices()">Previous Page</button>
+            <button class="back-button" onclick="goHome()">Home Page</button>
+        </div>
     </div>
 </div>
 
@@ -467,9 +511,11 @@
             <i class="fas fa-phone" onclick="startVoiceCall()"></i>
             <i class="fas fa-video" onclick="startVideoCall()"></i>
         </div>
+    </div> <!-- Closed profile-section div -->
+    <div class="bottom-nav-buttons">
+        <button class="back-button" onclick="goBackToTranslationServices()">Previous Page</button>
+        <button class="back-button" onclick="goHome()">Home Page</button>
     </div>
-    <a href="#" class="back-button" onclick="goBackToTranslatorList()">Previous Page</a>
-    <a href="#" class="back-button" onclick="goHome()">Home Page</a>
 </div>
 
 <!-- Footer -->
@@ -496,24 +542,35 @@
         ]
     };
 
+    // Function to hide all sections explicitly
+    function hideAllSections() {
+        document.getElementById('login-section').classList.add('hidden');
+        document.getElementById('translation-services').classList.add('hidden');
+        document.getElementById('document-translation').classList.add('hidden');
+        document.getElementById('translation-results').classList.add('hidden');
+        document.getElementById('real-time-translation').classList.add('hidden');
+        document.getElementById('translator-list-section').classList.add('hidden');
+        document.getElementById('translator-profile').classList.add('hidden');
+    }
+
     function moveToNextStep() {
-    document.getElementById('login-section').classList.add('hidden');
-    document.getElementById('translation-services').classList.remove('hidden');
-}
+        hideAllSections();
+        document.getElementById('translation-services').classList.remove('hidden');
+    }
 
     function showDocumentTranslation() {
-    document.getElementById('translation-services').classList.add('hidden');
-    document.getElementById('document-translation').classList.remove('hidden');
-}
+        hideAllSections();
+        document.getElementById('document-translation').classList.remove('hidden');
+    }
 
     function showRealTimeTranslation() {
-        document.getElementById('translation-services').classList.add('hidden');
+        hideAllSections();
         document.getElementById('real-time-translation').classList.remove('hidden');
     }
 
     function submitForTranslation() {
         const textToTranslate = document.getElementById('text-to-translate').value;
-        const language = document.getElementById('language').value;
+        const language = document.getElementById('language-select').value;
 
         if (!textToTranslate || !language) {
             alert('Please provide both the text and language.');
@@ -525,7 +582,7 @@
         document.getElementById('original-text').innerText = textToTranslate;
         document.getElementById('translated-text').innerText = translatedText;
 
-        document.getElementById('document-translation').classList.add('hidden');
+        hideAllSections();
         document.getElementById('translation-results').classList.remove('hidden');
     }
 
@@ -534,12 +591,12 @@
     }
 
     function goBackToTranslationServices() {
-    document.getElementById('document-translation').classList.add('hidden');
-    document.getElementById('translation-services').classList.remove('hidden');
-}
+        hideAllSections();
+        document.getElementById('translation-services').classList.remove('hidden');
+    }
 
     function goBackToDocumentTranslation() {
-        document.getElementById('translation-results').classList.add('hidden');
+        hideAllSections();
         document.getElementById('document-translation').classList.remove('hidden');
     }
 
@@ -547,6 +604,11 @@
         const selectedLanguage = document.getElementById('language-select').value;
         const translatorList = document.getElementById('translator-list');
         const translatorHeader = document.getElementById('translator-header');
+
+        if (!translators[selectedLanguage]) {
+            alert('No translators available for this language.');
+            return;
+        }
 
         translatorHeader.innerText = `List of Translators for ${selectedLanguage.charAt(0).toUpperCase() + selectedLanguage.slice(1)}`;
         translatorList.innerHTML = '';
@@ -558,23 +620,23 @@
             translatorList.appendChild(listItem);
         });
 
-        document.getElementById('real-time-translation').classList.add('hidden');
+        hideAllSections();
         document.getElementById('translator-list-section').classList.remove('hidden');
     }
 
     function showTranslatorProfile(translatorName) {
         document.getElementById('translator-name').innerText = translatorName;
-        document.getElementById('translator-list-section').classList.add('hidden');
+        hideAllSections();
         document.getElementById('translator-profile').classList.remove('hidden');
     }
 
     function goBackToRealTime() {
-        document.getElementById('translator-list-section').classList.add('hidden');
+        hideAllSections();
         document.getElementById('real-time-translation').classList.remove('hidden');
     }
 
     function goBackToTranslatorList() {
-        document.getElementById('translator-profile').classList.add('hidden');
+        hideAllSections();
         document.getElementById('translator-list-section').classList.remove('hidden');
     }
 
@@ -587,7 +649,8 @@
     }
 
     function goHome() {
-        location.reload();
+        hideAllSections();
+        document.getElementById('login-section').classList.remove('hidden');
     }
 
     function publishToCommunity() {
@@ -597,11 +660,6 @@
     function sendToTranslator() {
         alert('Sending translation to specific translator...');
     }
-    
-    function goHome() {
-    document.getElementById('document-translation').classList.add('hidden');
-    document.getElementById('login-section').classList.remove('hidden');
-}
 </script>
 
 </body>
