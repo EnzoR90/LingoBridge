@@ -387,6 +387,22 @@
 .upload-options.hidden {
     display: none;
 }
+
+.confirm-button {
+    background: linear-gradient(90deg, rgba(69,182,252,1) 0%, rgba(204,93,232,1) 100%);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.confirm-button:hover {
+    opacity: 0.9;
+}
         
     </style>
 </head>
@@ -512,6 +528,39 @@
     </div>
 </div>
 
+<!-- Request Details Section -->
+<div class="container hidden" id="request-details">
+    <h2>Additional Request Details</h2>
+    
+    <div class="input-group">
+        <label for="document-type">Document Type</label>
+        <input type="text" id="document-type" placeholder="e.g., Legal Document, Medical Report">
+    </div>
+
+    <div class="input-group">
+        <label for="specific-request">Specific Request</label>
+        <textarea id="specific-request" rows="3" placeholder="Enter any specific instructions here..."></textarea>
+    </div>
+
+    <!-- Select Translator dropdown, hidden by default -->
+    <div class="input-group hidden" id="translator-select-group" style="margin-top: 20px;">
+        <label for="translator-select">Select Translator</label>
+        <select id="translator-select" class="styled-select">
+            <!-- Options will be populated dynamically based on language -->
+        </select>
+    </div>
+
+    <!-- Submit buttons -->
+    <button class="confirm-button" onclick="submitToCommunity()">Submit to Community</button>
+    <button class="confirm-button" onclick="showTranslatorSelect()">Submit to Translator</button>
+
+    <!-- Navigation buttons, placed within the request details container -->
+    <div class="bottom-nav-buttons">
+        <button class="back-button" onclick="goBackToTranslationServices()">Previous Page</button>
+        <button class="back-button" onclick="goHome()">Home Page</button>
+    </div>
+</div>
+
 <!-- Real-Time Translation Form -->
 <div class="container hidden" id="real-time-translation">
     <h2>Real-Time Translation</h2>
@@ -594,14 +643,15 @@
 
     // Function to hide all sections explicitly
     function hideAllSections() {
-        document.getElementById('login-section').classList.add('hidden');
-        document.getElementById('translation-services').classList.add('hidden');
-        document.getElementById('document-translation').classList.add('hidden');
-        document.getElementById('translation-results').classList.add('hidden');
-        document.getElementById('real-time-translation').classList.add('hidden');
-        document.getElementById('translator-list-section').classList.add('hidden');
-        document.getElementById('translator-profile').classList.add('hidden');
-    }
+    document.getElementById('login-section').classList.add('hidden');
+    document.getElementById('translation-services').classList.add('hidden');
+    document.getElementById('document-translation').classList.add('hidden');
+    document.getElementById('translation-results').classList.add('hidden');
+    document.getElementById('real-time-translation').classList.add('hidden');
+    document.getElementById('translator-list-section').classList.add('hidden');
+    document.getElementById('translator-profile').classList.add('hidden');
+    document.getElementById('request-details').classList.add('hidden');  // Ensure request-details is hidden
+}
 
     function moveToNextStep() {
         hideAllSections();
@@ -641,9 +691,15 @@
     }
 
     function goBackToTranslationServices() {
-        hideAllSections();
-        document.getElementById('translation-services').classList.remove('hidden');
-    }
+    // Hide all sections and show only the translation services section
+    hideAllSections();
+    document.getElementById('translation-services').classList.remove('hidden');
+
+    // Reset dynamic elements in the request details section
+    document.getElementById('translator-select-group').classList.add('hidden'); // Hide translator select dropdown
+    document.querySelector("button[onclick='submitToCommunity()']").style.display = 'none';
+    document.querySelector("button[onclick='showTranslatorSelect()']").style.display = 'inline-block';
+}
 
     function goBackToDocumentTranslation() {
         hideAllSections();
@@ -715,6 +771,86 @@
     function sendToTranslator() {
         alert('Sending translation to specific translator...');
     }
+    
+    function showRequestDetails() {
+    hideAllSections();
+    document.getElementById('request-details').classList.remove('hidden');
+}
+
+function showTranslatorSelect() {
+    const language = document.getElementById('language-select').value;
+    populateTranslators(language);
+
+    // Show the translator dropdown and adjust button
+    document.getElementById("translator-select-group").classList.remove("hidden");
+    document.querySelector("button[onclick='showTranslatorSelect()']").setAttribute("onclick", "submitToTranslator()");
+    document.querySelector("button[onclick='submitToTranslator()']").innerText = "Confirm Submission to Translator";
+}
+
+function populateTranslators(language) {
+    const translatorSelect = document.getElementById("translator-select");
+    translatorSelect.innerHTML = ""; // Clear any existing options
+
+    if (translators[language]) {
+        translators[language].forEach(translator => {
+            const option = document.createElement("option");
+            option.value = translator.name;
+            option.textContent = `${translator.name} (${translator.status === 'online' ? '🟢 Online' : '🔴 Offline'})`;
+            translatorSelect.appendChild(option);
+        });
+    } else {
+        const option = document.createElement("option");
+        option.value = "";
+        option.textContent = "No translators available";
+        translatorSelect.appendChild(option);
+    }
+}
+
+function publishToCommunity() {
+    // Show the request details section for community submission
+    hideAllSections();
+    document.getElementById('request-details').classList.remove('hidden');
+
+    // Hide the translator selection dropdown for community submissions
+    document.getElementById('translator-select-group').classList.add("hidden");
+
+    // Change button action to community submission
+    document.querySelector("button[onclick='submitToCommunity()']").style.display = 'inline-block';
+    document.querySelector("button[onclick='showTranslatorSelect()']").style.display = 'none';
+}
+
+function sendToTranslator() {
+    // Show the request details section for translator submission
+    hideAllSections();
+    document.getElementById('request-details').classList.remove('hidden');
+
+    // Show the translator selection dropdown
+    document.getElementById("translator-select-group").classList.remove("hidden");
+
+    // Populate translator options based on language selection
+    const language = document.getElementById('language-select').value;
+    populateTranslators(language);
+
+    // Change button action to translator submission
+    document.querySelector("button[onclick='submitToCommunity()']").style.display = 'none';
+    document.querySelector("button[onclick='showTranslatorSelect()']").style.display = 'inline-block';
+}
+
+function showTranslatorSelect() {
+    // Convert the button to confirm final submission to translator
+    document.querySelector("button[onclick='showTranslatorSelect()']").setAttribute("onclick", "submitToTranslator()");
+    document.querySelector("button[onclick='submitToTranslator()']").innerText = "Confirm Submission to Translator";
+}
+
+function resetForm() {
+    // Reset form fields and visibility of elements
+    document.getElementById("document-type").value = "";
+    document.getElementById("specific-request").value = "";
+    document.getElementById("translator-select").innerHTML = "";
+
+    // Reset visibility of elements
+    goBackToTranslationServices();
+}
 </script>
 
 </body>
