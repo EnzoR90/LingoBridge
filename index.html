@@ -4,407 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
+    
+    <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        /* Header with the gradient background */
-        header {
-            background: linear-gradient(90deg, rgba(69,182,252,1) 0%, rgba(204,93,232,1) 100%);
-            color: white;
-            padding: 20px;
-            text-align: center;
-            font-size: 32px;
-            font-weight: bold;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            margin: 0;
-        }
-
-        .login-container, .container {
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            max-width: 400px;
-            width: 100%;
-            text-align: center;
-            margin: 20px auto;
-        }
-
-        h2 {
-            margin-bottom: 20px;
-            font-size: 24px;
-        }
-
-        .input-group {
-            margin-bottom: 15px;
-            text-align: left;
-        }
-
-        .input-group label {
-            display: block;
-            font-size: 14px;
-            margin-bottom: 5px;
-        }
-
-        .input-group input {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-
-        .forgot-password {
-            text-align: right;
-            font-size: 12px;
-            margin-bottom: 20px;
-            color: #999;
-        }
-
-        .login-button, .button, .show-translators-button, .translate-button {
-            background: linear-gradient(90deg, rgba(69,182,252,1) 0%, rgba(204,93,232,1) 100%);
-            color: white;
-            padding: 10px;
-            border: none;
-            border-radius: 25px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .login-button:hover, .button:hover, .show-translators-button:hover, .translate-button:hover {
-            opacity: 0.9;
-        }
-
-        .social-login {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-        }
-
-        .social-login a {
-            color: white;
-            font-size: 20px;
-            padding: 10px 15px;
-            margin: 0 10px;
-            border-radius: 50%;
-            display: inline-block;
-        }
-
-        .facebook { background-color: #3b5998; }
-        .twitter { background-color: #1DA1F2; }
-        .google { background-color: #db4a39; }
-
-        .signup-link { margin-top: 20px; font-size: 14px; }
-
-        /* Styling for "Previous" and "Home" buttons specifically */
-        .back-button, .nav-buttons .button {
-            background: #e0e0e0;
-            color: #333;
-            padding: 10px;
-            border: none;
-            border-radius: 25px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .back-button:hover, .nav-buttons .button:hover {
-            background: #d5d5d5;
-        }
-
-        /* Hidden sections */
-        .hidden {
-            display: none;
-        }
-
-        /* Styles for Translation Options */
-        .option-cards {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 20px;
-        }
-
-        .option-card {
-            background-color: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            max-width: 300px;
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .option-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-        }
-
-        .label-large { font-size: 18px; font-weight: bold; color: #333; margin-bottom: 10px; display: block; }
-
-        .action-buttons { margin-top: 30px; display: flex; justify-content: space-between; }
-
-        /* Footer fixed at the bottom */
-        footer {
-            text-align: center;
-            font-size: 14px;
-            width: 100%;
-            padding: 10px;
-            background-color: #f1f1f1;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-        }
-
-        /* Gradient button style for "Send to Community" and "Send to Translator" */
-        .gradient-button {
-            background: linear-gradient(90deg, rgba(69,182,252,1) 0%, rgba(204,93,232,1) 100%);
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 25px;
-            font-size: 16px;
-            cursor: pointer;
-            margin: 5px;
-            transition: background 0.3s;
-            text-decoration: none;
-        }
-
-        .gradient-button:hover {
-            opacity: 0.9;
-        }
-
-        /* Center action buttons in the Translation Results section */
-        .action-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        /* Styling for "Previous Page" and "Home Page" buttons */
-        .nav-buttons .button {
-            background: linear-gradient(90deg, rgba(69,182,252,1) 0%, rgba(204,93,232,1) 100%);
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 25px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background 0.3s;
-            margin: 5px;
-            text-decoration: none;
-        }
-
-        .nav-buttons .button:hover {
-            opacity: 0.9;
-        }
-
-        .back-button {
-            background: #e0e0e0;
-            color: #333;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 25px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background 0.3s;
-            text-decoration: none;
-        }
-
-        .back-button:hover {
-            background: #d5d5d5;
-        }
-
-        /* ADDITIONAL CODE FOR UI TRANSLATION */
-        /* Styles for positioning the bottom navigation buttons */
-        .bottom-nav-buttons {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid #ddd;
-        }
-
-        /* Translate button styling */
-        .translate-button {
-            background: linear-gradient(90deg, rgba(69,182,252,1) 0%, rgba(204,93,232,1) 100%);
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 25px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background 0.3s;
-            width: 100%;
-        }
-
-        .translate-button:hover {
-            opacity: 0.9;
-        }
-
-        /* Back and Home buttons styling */
-        .back-button {
-            background: #e0e0e0;
-            color: #333;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 25px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background 0.3s;
-            width: 48%;
-            text-align: center;
-        }
-
-        .back-button:hover {
-            background: #d5d5d5;
-        }
-
-        /* Select Language Container */
-        .language-select-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 15px;
-            margin-bottom: 20px;
-        }
-
-        .language-label {
-            font-size: 20px;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 10px;
-            text-align: center;
-        }
-
-        .styled-select {
-            width: 100%;
-            max-width: 300px;
-            padding: 12px 10px;
-            font-size: 16px;
-            font-weight: bold;
-            border: 2px solid rgba(69,182,252,1);
-            border-radius: 8px;
-            background-color: #f4f8fb;
-            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23777' d='M2 0L0 2h4z'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 10px center;
-            background-size: 12px 12px;
-            appearance: none;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            cursor: pointer;
-        }
-
-        .styled-select:hover {
-            background-color: #e9f3fc;
-        }
-
-        .styled-select:focus {
-            outline: none;
-            border-color: rgba(204,93,232,1);
-            background-color: #e9f3fc;
-        }
-
-        /* Action Icons for Translation Results */
-        .action-icons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .action-icons a {
-            color: white;
-            font-size: 24px;
-            padding: 15px;
-            border-radius: 50%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            transition: background-color 0.3s;
-        }
-
-        .community-icon {
-            background-color: #4CAF50; /* Green background */
-        }
-
-        .translator-icon {
-            background-color: #FF9800; /* Orange background */
-        }
-
-        .action-icons a:hover {
-            opacity: 0.9;
-        }
-        
-/* Style for the text area container */
-.text-area-container {
-    position: relative;
-}
-
-.text-box {
-    width: 100%;
-    padding: 10px;
-    border-radius: 5px;
-}
-
-/* Style for the floating "+" upload toggle button */
-.upload-toggle {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    cursor: pointer;
-    font-size: 18px;
-}
-
-/* Style for the upload options container */
-.upload-options {
-    margin-top: 10px;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #f4f4f4;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.upload-options.hidden {
-    display: none;
-}
-
-.confirm-button {
-    background: linear-gradient(90deg, rgba(69,182,252,1) 0%, rgba(204,93,232,1) 100%);
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 25px;
-    font-size: 16px;
-    cursor: pointer;
-    margin-top: 10px;
-    width: 100%;
-}
-
-.confirm-button:hover {
-    opacity: 0.9;
-}
-        
-    </style>
+    
+    <!-- Link to main.css for styling -->
+    <link rel="stylesheet" href="main.css">
 </head>
 <body>
 
@@ -415,49 +20,57 @@
 <div class="main-content">
 
 <!-- Login Section -->
-<div class="login-container" id="login-section">
-    <h2>Login</h2>
-    <div class="input-group">
-        <label for="username"><i class="fas fa-user"></i> Username</label>
-        <input type="text" id="username" placeholder="Type your username">
+    <div class="login-container" id="login-section">
+        <h2>Login</h2>
+        <form id="login-form" onsubmit="login(event)">
+            <div class="input-group">
+                <label for="login-email"><i class="fas fa-user"></i> Email</label>
+                <input type="email" id="login-email" placeholder="Enter your email" required>
+            </div>
+            <div class="input-group">
+                <label for="login-password"><i class="fas fa-lock"></i> Password</label>
+                <input type="password" id="login-password" placeholder="Enter your password" required>
+            </div>
+            <button type="submit" class="login-button">Login</button>
+        </form>
+        <p>New here? <a href="#" onclick="showSignup()">Sign Up</a></p>
     </div>
-    <div class="input-group">
-        <label for="password"><i class="fas fa-lock"></i> Password</label>
-        <input type="password" id="password" placeholder="Type your password">
-    </div>
-    <div class="forgot-password">
-        <a href="#">Forgot password?</a>
-    </div>
-    <button class="login-button" onclick="moveToNextStep()">Login</button>
-    <p>Or Sign Up Using</p>
-    <div class="social-login">
-        <a href="#" class="facebook" onclick="moveToNextStep()"><i class="fab fa-facebook-f"></i></a>
-        <a href="#" class="twitter" onclick="moveToNextStep()"><i class="fab fa-twitter"></i></a>
-        <a href="#" class="google" onclick="moveToNextStep()"><i class="fab fa-google"></i></a>
-    </div>
-    <div class="signup-link">
-        <p>Or Sign Up Using <a href="#" onclick="moveToNextStep()">Sign Up</a></p>
-    </div>
-</div>
 
-<!-- Translation Services Section -->
+    <!-- Signup Section -->
+    <div class="signup-container hidden" id="signup-section">
+        <h2>Sign Up</h2>
+        <form id="signup-form" onsubmit="signup(event)">
+            <div class="input-group">
+                <label for="signup-email"><i class="fas fa-envelope"></i> Email</label>
+                <input type="email" id="signup-email" placeholder="Enter your email" required>
+            </div>
+            <div class="input-group">
+                <label for="signup-password"><i class="fas fa-lock"></i> Password</label>
+                <input type="password" id="signup-password" placeholder="Enter your password" required>
+            </div>
+            <button type="submit" class="login-button">Sign Up</button>
+        </form>
+        <p>Already registered? <a href="#" onclick="showLogin()">Login</a></p>
+    </div>
+
+    <!-- Translation Services Section -->
 <div class="container hidden" id="translation-services">
     <h2>Select Translation Type</h2>
     <div class="option-cards">
         <div class="option-card">
             <h3>Document Translation</h3>
-            <p>Type, upload documents, or images for translation into your selected language. Ideal for text-heavy files and documents.</p>
+            <p>Type or upload documents for translation.</p>
             <a href="#" class="button" onclick="showDocumentTranslation()">Select</a>
         </div>
         <div class="option-card">
             <h3>Real-Time Translation</h3>
-            <p>Access live translation assistance for conversations or immediate translations. Perfect for real-time language support.</p>
+            <p>Access live translation assistance for conversations.</p>
             <a href="#" class="button" onclick="showRealTimeTranslation()">Select</a>
         </div>
     </div>
 </div>
 
-<!-- Document Translation Form -->
+    <!-- Document Translation Form -->
 <div class="container hidden" id="document-translation">
     <h2>Submit Document for Translation</h2>
     <div class="language-select-container">
@@ -468,6 +81,14 @@
             <option value="chinese">Chinese</option>
         </select>
     </div>
+
+    <!-- Inside Document Translation Form -->
+<div class="upload-options hidden" id="upload-options">
+    <label for="text-upload">
+        <i class="fas fa-file-upload icon"></i> Upload Document (PDF, DOC, DOCX)
+        <input type="file" id="text-upload" name="text-upload" accept=".pdf, .doc, .docx" onchange="handleFileUpload(event)" style="display: none;">
+    </label>
+</div>
     
     <div class="input-group">
         <label for="text-to-translate">Text to Translate</label>
@@ -492,40 +113,74 @@
             </div>
         </div>
     </div>
-    
+
     <div class="action-buttons">
         <button class="translate-button" onclick="submitForTranslation()">Translate</button>
     </div>
-    
-    <div class="bottom-nav-buttons">
-        <button class="back-button" onclick="goBackToTranslationServices()">Previous Page</button>
-        <button class="back-button" onclick="goHome()">Home Page</button>
+
+        <div class="bottom-nav-buttons">
+            <button class="back-button" onclick="goBackToTranslationServices()">Previous Page</button>
+            <button class="back-button" onclick="goHome()">Home Page</button>
+        </div>
     </div>
+
+    <!-- Translation Results Section -->
+    <div class="container hidden" id="translation-results">
+        <h2>Translation Result</h2>
+        <p><strong>Original Text:</strong></p>
+        <p id="original-text"></p>
+        <p><strong>Translated Text:</strong></p>
+        <p id="translated-text"></p>
+        
+        <div class="action-icons">
+            <a href="#" class="community-icon" aria-label="Publish to Community" onclick="publishToCommunity()">
+                <i class="fas fa-users"></i>
+                <span class="icon-label">Community</span>
+            </a>
+            <a href="#" class="translator-icon" aria-label="Send to Translator" onclick="sendToTranslator()">
+                <i class="fas fa-user-cog"></i>
+                <span class="icon-label">Translator</span>
+            </a>
+        </div>
+
+        <div class="bottom-nav-buttons">
+            <button class="back-button" onclick="goBackToTranslationServices()">Previous Page</button>
+        </div>
+    </div>
+
+    <!-- Submit to Community Section -->
+<div class="container hidden" id="community-form-section">
+    <h2>Submit to Community</h2>
+    <form id="community-form" onsubmit="submitCommunityPost(event)">
+        <div class="form-group">
+            <label for="document-type">Type of Document</label>
+            <select id="document-type" required>
+                <option value="Legal">Legal</option>
+                <option value="Health Care">Health Care</option>
+                <option value="Employment">Employment</option>
+                <option value="Others">Others</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="additional-comments">Additional Comments or Questions</label>
+            <textarea id="additional-comments" placeholder="Add any comments or questions here..."></textarea>
+        </div>
+
+        <div class="button-group">
+            <button type="submit" class="submit-button">Submit to Community</button>
+            <button type="button" class="back-button" onclick="showTranslationResults()">Back</button>
+        </div>
+    </form>
 </div>
 
-<!-- Translation Results Section -->
-<div class="container hidden" id="translation-results">
-    <h2>Translation Result</h2>
-    <p><strong>Original Text:</strong></p>
-    <p id="original-text"></p>
-    <p><strong>Translated Text:</strong></p>
-    <p id="translated-text"></p>
-    
-    <!-- Action Icons Section -->
-    <div class="action-icons">
-        <a href="#" class="community-icon" aria-label="Publish to Community" onclick="publishToCommunity()">
-    <i class="fas fa-users"></i>
-</a>
-<a href="#" class="translator-icon" aria-label="Send to Translator" onclick="sendToTranslator()">
-    <i class="fas fa-user-cog"></i>
-</a>
+    <!-- Community Feed Section -->
+    <div class="container hidden" id="community-feed-section">
+        <h2>Community Posts</h2>
+        <div id="post-container"></div>
+        <button type="button" class="back-button" onclick="showTranslationResults()">Back</button>
     </div>
-    
-    <!-- Navigation Buttons Section -->
-    <div class="bottom-nav-buttons">
-        <button class="back-button" onclick="goBackToTranslationServices()">Previous Page</button>
-        <button class="back-button" onclick="goHome()">Home Page</button>
-    </div>
+
 </div>
 
 <!-- Request Details Section -->
@@ -622,236 +277,19 @@
     <p>LingoBridge | Unlock the Power of Translation, Anytime, Anywhere</p>
 </footer>
 
-<script>
-    const translators = {
-        spanish: [
-            { name: "Maria Garcia", status: "online" },
-            { name: "Carlos Lopez", status: "online" },
-            { name: "Elena Cruz", status: "offline" }
-        ],
-        filipino: [
-            { name: "Juan Dela Cruz", status: "online" },
-            { name: "Maria Santos", status: "online" },
-            { name: "Pedro Villanueva", status: "offline" }
-        ],
-        chinese: [
-            { name: "Chen Wei", status: "online" },
-            { name: "Li Ming", status: "online" },
-            { name: "Wang Ping", status: "offline" }
-        ]
-    };
+<script src="https://cdn.auth0.com/js/auth0-spa-js/1.19/auth0-spa-js.production.js"></script>
 
-    // Function to hide all sections explicitly
-    function hideAllSections() {
-    document.getElementById('login-section').classList.add('hidden');
-    document.getElementById('translation-services').classList.add('hidden');
-    document.getElementById('document-translation').classList.add('hidden');
-    document.getElementById('translation-results').classList.add('hidden');
-    document.getElementById('real-time-translation').classList.add('hidden');
-    document.getElementById('translator-list-section').classList.add('hidden');
-    document.getElementById('translator-profile').classList.add('hidden');
-    document.getElementById('request-details').classList.add('hidden');  // Ensure request-details is hidden
-}
+<!-- PDF.js for PDF parsing -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
 
-    function moveToNextStep() {
-        hideAllSections();
-        document.getElementById('translation-services').classList.remove('hidden');
-    }
+<!-- Mammoth.js for DOC/DOCX parsing -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.4.2/mammoth.browser.min.js"></script>
 
-    function showDocumentTranslation() {
-        hideAllSections();
-        document.getElementById('document-translation').classList.remove('hidden');
-    }
+<!-- Firebase Setup without Modules -->
+<script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-firestore-compat.js"></script>
 
-    function showRealTimeTranslation() {
-        hideAllSections();
-        document.getElementById('real-time-translation').classList.remove('hidden');
-    }
-
-    function submitForTranslation() {
-        const textToTranslate = document.getElementById('text-to-translate').value;
-        const language = document.getElementById('language-select').value;
-
-        if (!textToTranslate || !language) {
-            alert('Please provide both the text and language.');
-            return;
-        }
-
-        const translatedText = aiPoweredTranslation(textToTranslate, language);
-
-        document.getElementById('original-text').innerText = textToTranslate;
-        document.getElementById('translated-text').innerText = translatedText;
-
-        hideAllSections();
-        document.getElementById('translation-results').classList.remove('hidden');
-    }
-
-    function aiPoweredTranslation(text, language) {
-        return text.split('').reverse().join('') + ` (Translated to ${language})`;
-    }
-
-    function goBackToTranslationServices() {
-    // Hide all sections and show only the translation services section
-    hideAllSections();
-    document.getElementById('translation-services').classList.remove('hidden');
-
-    // Reset dynamic elements in the request details section
-    document.getElementById('translator-select-group').classList.add('hidden'); // Hide translator select dropdown
-    document.querySelector("button[onclick='submitToCommunity()']").style.display = 'none';
-    document.querySelector("button[onclick='showTranslatorSelect()']").style.display = 'inline-block';
-}
-
-    function goBackToDocumentTranslation() {
-        hideAllSections();
-        document.getElementById('document-translation').classList.remove('hidden');
-    }
-
-    function showTranslators() {
-        const selectedLanguage = document.getElementById('language-select').value;
-        const translatorList = document.getElementById('translator-list');
-        const translatorHeader = document.getElementById('translator-header');
-
-        if (!translators[selectedLanguage]) {
-            alert('No translators available for this language.');
-            return;
-        }
-
-        translatorHeader.innerText = `List of Translators for ${selectedLanguage.charAt(0).toUpperCase() + selectedLanguage.slice(1)}`;
-        translatorList.innerHTML = '';
-
-        translators[selectedLanguage].forEach(translator => {
-            const listItem = document.createElement('li');
-            listItem.innerHTML = `${translator.name} <span class="translator-status">${translator.status === 'online' ? '🟢' : '🔴'}</span>`;
-            listItem.onclick = () => showTranslatorProfile(translator.name);
-            translatorList.appendChild(listItem);
-        });
-
-        hideAllSections();
-        document.getElementById('translator-list-section').classList.remove('hidden');
-    }
-
-    function showTranslatorProfile(translatorName) {
-        document.getElementById('translator-name').innerText = translatorName;
-        hideAllSections();
-        document.getElementById('translator-profile').classList.remove('hidden');
-    }
-
-    function goBackToRealTime() {
-        hideAllSections();
-        document.getElementById('real-time-translation').classList.remove('hidden');
-    }
-    
-    function toggleUploadOptions() {
-    const uploadOptions = document.getElementById("upload-options");
-    uploadOptions.classList.toggle("hidden");
-}
-
-    function goBackToTranslatorList() {
-        hideAllSections();
-        document.getElementById('translator-list-section').classList.remove('hidden');
-    }
-
-    function startVoiceCall() {
-        alert("Starting voice call...");
-    }
-
-    function startVideoCall() {
-        alert("Starting video call...");
-    }
-
-    function goHome() {
-        hideAllSections();
-        document.getElementById('login-section').classList.remove('hidden');
-    }
-
-    function publishToCommunity() {
-        alert('Published to community translators!');
-    }
-
-    function sendToTranslator() {
-        alert('Sending translation to specific translator...');
-    }
-    
-    function showRequestDetails() {
-    hideAllSections();
-    document.getElementById('request-details').classList.remove('hidden');
-}
-
-function showTranslatorSelect() {
-    const language = document.getElementById('language-select').value;
-    populateTranslators(language);
-
-    // Show the translator dropdown and adjust button
-    document.getElementById("translator-select-group").classList.remove("hidden");
-    document.querySelector("button[onclick='showTranslatorSelect()']").setAttribute("onclick", "submitToTranslator()");
-    document.querySelector("button[onclick='submitToTranslator()']").innerText = "Confirm Submission to Translator";
-}
-
-function populateTranslators(language) {
-    const translatorSelect = document.getElementById("translator-select");
-    translatorSelect.innerHTML = ""; // Clear any existing options
-
-    if (translators[language]) {
-        translators[language].forEach(translator => {
-            const option = document.createElement("option");
-            option.value = translator.name;
-            option.textContent = `${translator.name} (${translator.status === 'online' ? '🟢 Online' : '🔴 Offline'})`;
-            translatorSelect.appendChild(option);
-        });
-    } else {
-        const option = document.createElement("option");
-        option.value = "";
-        option.textContent = "No translators available";
-        translatorSelect.appendChild(option);
-    }
-}
-
-function publishToCommunity() {
-    // Show the request details section for community submission
-    hideAllSections();
-    document.getElementById('request-details').classList.remove('hidden');
-
-    // Hide the translator selection dropdown for community submissions
-    document.getElementById('translator-select-group').classList.add("hidden");
-
-    // Change button action to community submission
-    document.querySelector("button[onclick='submitToCommunity()']").style.display = 'inline-block';
-    document.querySelector("button[onclick='showTranslatorSelect()']").style.display = 'none';
-}
-
-function sendToTranslator() {
-    // Show the request details section for translator submission
-    hideAllSections();
-    document.getElementById('request-details').classList.remove('hidden');
-
-    // Show the translator selection dropdown
-    document.getElementById("translator-select-group").classList.remove("hidden");
-
-    // Populate translator options based on language selection
-    const language = document.getElementById('language-select').value;
-    populateTranslators(language);
-
-    // Change button action to translator submission
-    document.querySelector("button[onclick='submitToCommunity()']").style.display = 'none';
-    document.querySelector("button[onclick='showTranslatorSelect()']").style.display = 'inline-block';
-}
-
-function showTranslatorSelect() {
-    // Convert the button to confirm final submission to translator
-    document.querySelector("button[onclick='showTranslatorSelect()']").setAttribute("onclick", "submitToTranslator()");
-    document.querySelector("button[onclick='submitToTranslator()']").innerText = "Confirm Submission to Translator";
-}
-
-function resetForm() {
-    // Reset form fields and visibility of elements
-    document.getElementById("document-type").value = "";
-    document.getElementById("specific-request").value = "";
-    document.getElementById("translator-select").innerHTML = "";
-
-    // Reset visibility of elements
-    goBackToTranslationServices();
-}
-</script>
+<script src="main.js"></script>
 
 </body>
 </html>
