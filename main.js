@@ -22,22 +22,6 @@ function hideAllSections() {
     sections.forEach(section => section.classList.add("hidden"));
 }
 
-//function hideAllSections() {
-    //const sectionIds = [
-      //  'login-section', 'signup-section', 'translation-services', 
-        //'document-translation', 'translation-results', 
-        //'real-time-translation', 'translator-list-section', 
-        //'translator-profile', 'request-details'
-   // ];
-
-   // sectionIds.forEach(id => {
-     //   const element = document.getElementById(id);
-       // if (element) {
-         //   element.classList.add('hidden');
-        //}
-   // });
-//}
-
 // Navigation functions
 function moveToNextStep() {
     hideAllSections();
@@ -288,7 +272,9 @@ document.addEventListener('DOMContentLoaded', () => {
     showLogin();
 });
 
-// Handle file upload and determine file type
+let uploadedFileType = ""; // To store the type of uploaded file (doc, pdf, or none)
+
+// Update extractedText function to track the uploaded file type
 function handleFileUpload(event) {
     const file = event.target.files[0]; // Get the uploaded file
     if (!file) {
@@ -296,19 +282,66 @@ function handleFileUpload(event) {
         return;
     }
 
-    // Check file type and call the relevant function
     if (file.type === "application/pdf") {
+        uploadedFileType = "pdf";
         extractTextFromPDF(file);
     } else if (
         file.type === "application/msword" ||
         file.type === "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
     ) {
+        uploadedFileType = "doc";
         extractTextFromDOC(file);
     } else {
         alert("Unsupported file type. Please upload a PDF or DOC file.");
+        uploadedFileType = ""; // Reset on error
     }
 }
 
+// Function to download the translation
+function downloadTranslation() {
+    const originalText = document.getElementById('original-text').innerText;
+    const translatedText = document.getElementById('translated-text').innerText;
+
+    if (!translatedText) {
+        alert("No translation available to download.");
+        return;
+    }
+
+    const content = `
+        Original Text:
+        ${originalText}
+
+        Translated Text:
+        ${translatedText}
+    `;
+
+    if (uploadedFileType === "pdf") {
+        // Generate PDF using jsPDF
+        const doc = new jsPDF();
+        doc.text(content, 10, 10); // Add content to PDF
+        doc.save("translated_text.pdf"); // Download the PDF
+    } else if (uploadedFileType === "doc" || uploadedFileType === "") {
+        // Generate a Word document
+        const blob = new Blob([content], {
+            type: "application/msword;charset=utf-8",
+        });
+        const link = document.createElement("a");
+        link.href = window.URL.createObjectURL(blob);
+        link.download = "translated_text.doc";
+        link.click();
+    } else {
+        alert("Unsupported file type for download.");
+    }
+}
+
+// Example: Mock translation completion
+function showTranslationResults() {
+    hideAllSections();
+    document.getElementById('translation-results').classList.remove('hidden');
+    document.getElementById('download-translation').classList.remove('hidden'); // Show download button
+}
+
+// Extract text from PDF
 async function extractTextFromPDF(file) {
     try {
         const arrayBuffer = await file.arrayBuffer();
@@ -321,55 +354,63 @@ async function extractTextFromPDF(file) {
             text += content.items.map(item => item.str).join(" ");
         }
 
-        // Send extracted text for translation
-        console.log("Extracted text from PDF:", text); // Log to verify
-        translateExtractedText(text);
+        extractedText = text; // Store extracted text
+        alert("Text extracted successfully. Click 'Translate' to process.");
     } catch (error) {
         console.error("Error extracting text from PDF:", error);
         alert("Failed to extract text from PDF. Please try a different file.");
     }
 }
 
+// Extract text from DOC/DOCX
 async function extractTextFromDOC(file) {
     try {
         const arrayBuffer = await file.arrayBuffer();
         const result = await mammoth.extractRawText({ arrayBuffer });
-        const text = result.value;
-
-        // Send extracted text for translation
-        console.log("Extracted text from DOC/DOCX:", text); // Log to verify
-        translateExtractedText(text);
+        extractedText = result.value; // Store extracted text
+        alert("Text extracted successfully. Click 'Translate' to process.");
     } catch (error) {
         console.error("Error extracting text from DOC/DOCX:", error);
         alert("Failed to extract text from DOC/DOCX. Please try a different file.");
     }
 }
 
-async function translateExtractedText(text) {
+// Submit for Translation
+function submitForTranslation() {
+    const textArea = document.getElementById('text-to-translate');
+    const textToTranslate = textArea?.value || extractedText; // Use either text area or extracted text
     const languageSelect = document.getElementById('language-select');
-    const targetLanguage = languageSelect ? languageCodeMap[languageSelect.value] : null;
+    const userSelectedLanguage = languageSelect ? languageSelect.value : null;
+    const targetLanguage = languageCodeMap[userSelectedLanguage];
 
-    if (!targetLanguage) {
-        alert('Please select a target language for translation.');
+    if (!textToTranslate || !targetLanguage) {
+        alert('Please provide both the text and a valid language.');
         return;
     }
 
-    try {
-        const translatedText = await aiPoweredTranslation(text, targetLanguage);
-        if (translatedText.startsWith("Error:")) {
-            alert(translatedText);
-            return;
-        }
+    aiPoweredTranslation(textToTranslate, targetLanguage)
+        .then(translatedText => {
+            if (translatedText.startsWith("Error:")) {
+                alert(translatedText);
+                return;
+            }
 
-        // Display the translation results
-        document.getElementById('original-text').innerText = text;
-        document.getElementById('translated-text').innerText = translatedText;
-        hideAllSections();
-        document.getElementById('translation-results')?.classList.remove('hidden');
-    } catch (error) {
-        console.error("Translation failed:", error);
-        alert("Translation failed. Please try again.");
-    }
+            const originalTextElem = document.getElementById('original-text');
+            const translatedTextElem = document.getElementById('translated-text');
+
+            if (originalTextElem && translatedTextElem) {
+                originalTextElem.innerText = textToTranslate;
+                translatedTextElem.innerText = translatedText;
+                hideAllSections();
+                document.getElementById('translation-results')?.classList.remove('hidden');
+            } else {
+                console.error("Elements for displaying translation results are missing.");
+            }
+        })
+        .catch(error => {
+            console.error("Translation Error:", error);
+            alert("Translation failed. Please try again later.");
+        });
 }
 
 // Show specific sections and hide others
@@ -415,14 +456,37 @@ async function submitCommunityPost(event) {
     const username = localStorage.getItem("user-email");
     const documentType = document.getElementById("document-type").value;
     const additionalComments = document.getElementById("additional-comments").value;
+    const fileInput = document.getElementById("community-file-upload");
+    const file = fileInput.files[0]; // Get the uploaded file
+
+    // Validate the file (optional)
+    if (file) {
+        const allowedTypes = ["application/pdf", "application/msword", 
+                              "application/vnd.openxmlformats-officedocument.wordprocessingml.document", 
+                              "text/plain"];
+        if (!allowedTypes.includes(file.type)) {
+            alert("Unsupported file type. Please upload a valid file.");
+            return;
+        }
+    }
 
     try {
+        // Firebase document upload (if needed)
+        let fileUrl = null;
+        if (file) {
+            const storageRef = firebase.storage().ref(`community_files/${file.name}`);
+            const uploadTask = await storageRef.put(file);
+            fileUrl = await uploadTask.ref.getDownloadURL();
+        }
+
+        // Save community post to Firestore
         await db.collection("posts").add({
             username: username,
             documentType: documentType,
             additionalComments: additionalComments,
+            fileUrl: fileUrl || null, // Include file URL if uploaded
             comments: [],
-            timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
         });
 
         alert("Your post has been submitted to the community!");
