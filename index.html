@@ -106,16 +106,19 @@
                     <i class="fas fa-file-upload icon"></i> Text File
                     <input type="file" id="text-upload" name="text-upload" accept=".txt, .doc, .docx, .pdf" style="display: none;">
                 </label>
-                <label for="screenshot-upload">
-                    <i class="fas fa-camera icon"></i> Screenshot
-                    <input type="file" id="screenshot-upload" name="screenshot-upload" accept=".png, .jpg, .jpeg" style="display: none;">
-                </label>
             </div>
         </div>
     </div>
 
     <div class="action-buttons">
         <button class="translate-button" onclick="submitForTranslation()">Translate</button>
+    </div>
+
+    <!-- Text Preview -->
+    <div id="text-preview-container" class="hidden">
+        <h3>Preview Extracted Text</h3>
+        <textarea id="text-preview" rows="10" readonly></textarea>
+        <button onclick="submitForTranslation()">Translate</button>
     </div>
 
         <div class="bottom-nav-buttons">
@@ -131,6 +134,10 @@
         <p id="original-text"></p>
         <p><strong>Translated Text:</strong></p>
         <p id="translated-text"></p>
+
+        <div class="action-buttons">
+            <button id="download-translation" class="download-button" onclick="downloadTranslation()">Download Translation</button>
+        </div>
         
         <div class="action-icons">
             <a href="#" class="community-icon" aria-label="Publish to Community" onclick="publishToCommunity()">
@@ -143,8 +150,8 @@
             </a>
         </div>
 
-        <div class="bottom-nav-buttons">
-            <button class="back-button" onclick="goBackToTranslationServices()">Previous Page</button>
+        <div class="bottom-nav-button-transresult">
+            <button class="back-button-transresult" onclick="goBackToTranslationServices()">Previous Page</button>
         </div>
     </div>
 
@@ -165,6 +172,12 @@
         <div class="form-group">
             <label for="additional-comments">Additional Comments or Questions</label>
             <textarea id="additional-comments" placeholder="Add any comments or questions here..."></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="community-file-upload">Attach Document (Optional)</label>
+            <input type="file" id="community-file-upload" accept=".pdf, .doc, .docx, .txt">
+            <div class="file-format-note">Accepted formats: .pdf, .doc, .docx, .txt</div>
         </div>
 
         <div class="button-group">
@@ -279,17 +292,23 @@
 
 <script src="https://cdn.auth0.com/js/auth0-spa-js/1.19/auth0-spa-js.production.js"></script>
 
-<!-- PDF.js for PDF parsing -->
+<!-- Load External Libraries -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
-
-<!-- Mammoth.js for DOC/DOCX parsing -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.4.2/mammoth.browser.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/docx@7.1.1/build/index.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
 
 <!-- Firebase Setup without Modules -->
 <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-firestore-compat.js"></script>
 
 <script src="main.js"></script>
+
+<script>
+    console.log("Testing docx library:", typeof docx !== 'undefined' ? "Loaded" : "Not loaded");
+    console.log("Testing PDFLib library:", typeof PDFLib !== 'undefined' ? "Loaded" : "Not loaded");
+</script>
 
 </body>
 </html>
