@@ -527,3 +527,45 @@ input[type="text"] {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     background-color: white;
 }
+
+.download-button {
+    background: linear-gradient(90deg, rgba(69,182,252,1) 0%, rgba(204,93,232,1) 100%);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+    width: 100%;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column; /* Stack label, button, and note vertically */
+        align-items: center; /* Center-align all child elements horizontally */
+        margin-bottom: 1rem;
+    }
+    
+    #community-file-upload {
+        margin-bottom: 0.5rem; /* Add space between the button and the note */
+    }
+    
+    .file-format-note {
+        font-size: 0.875rem; /* Smaller font size for the note */
+        color: #666; /* Subtle gray color */
+        text-align: center; /* Center-align the note text */
+        margin-top: 0.25rem;
+    }
+
+    .bottom-nav-button-transresult {
+        display: flex;
+        justify-content: center; /* Centers the button horizontally */
+        margin-top: 1rem; /* Add space above the button */
+    }
+    
+    .back-button-transresult {
+        padding: 10px 20px; /* Optional: Adjust button padding */
+        font-size: 1rem; /* Optional: Adjust font size */
+        cursor: pointer;
+    }
